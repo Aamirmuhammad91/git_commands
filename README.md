@@ -62,3 +62,18 @@ git pull
 git merge origin/master
 git push
 ```
+
+## Removing commits with secret information
+
+### check this link
+
+1. https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/removing-sensitive-data-from-a-repository
+
+2. check this video "https://www.youtube.com/watch?v=liCAFV8Rmbs". The procedure in this videos is as below.
+
+- git filter-branch --force --index-filter "git rm --cached --ignore-unmatch PATH-TO-YOUR-FILE-WITH-SENSITIVE-DATA(here in my case ./secrets.txt)" --prune-empty --tag-name-filter cat -- --all
+- echo "secrets.txt" >> .gitignore
+- git add .gitignore
+- git commit -m "gitignore committed"
+- git push origin --force --all
+- git push origin --force --tags
