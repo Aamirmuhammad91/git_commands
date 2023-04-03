@@ -67,13 +67,35 @@ git push
 
 ### check this link
 
+This procedure will remove the whole file with secret information from all the commit history.
+
 1. https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/removing-sensitive-data-from-a-repository
 
 2. check this video "https://www.youtube.com/watch?v=liCAFV8Rmbs". The procedure in this videos is as below.
 
-- git filter-branch --force --index-filter "git rm --cached --ignore-unmatch PATH-TO-YOUR-FILE-WITH-SENSITIVE-DATA(here in my case ./secrets.txt)" --prune-empty --tag-name-filter cat -- --all
-- echo "secrets.txt" >> .gitignore
-- git add .gitignore
-- git commit -m "gitignore committed"
-- git push origin --force --all
-- git push origin --force --tags
+- `git filter-branch --force --index-filter "git rm --cached --ignore-unmatch PATH-TO-YOUR-FILE-WITH-SENSITIVE-DATA(here in my case ./secrets.txt)" --prune-empty --tag-name-filter cat -- --all`
+- `echo "secrets.txt" >> .gitignore`
+- `git add .gitignore`
+- `git commit -m "gitignore committed"`
+- `git push origin --force --all`
+- `git push origin --force --tags`
+
+## checking for all the commits with a secret string
+
+git log -S password -p --all`
+
+`git log -S SECRET_STRING -p --all > log.txt`
+
+## replacing secret string with xxxxxxx
+
+check these links for instruction
+
+1. https://github.com/newren/git-filter-repo/blob/main/INSTALL.md
+2. https://jessehouwing.net/installing-git-filter-repo-on-windows/ (I followed this method as a window user)
+
+and then check this stackoverflow issue.
+
+https://stackoverflow.com/questions/46950829/how-to-replace-a-string-in-whole-git-history
+
+- the important comman is
+  `git filter-repo --replace-text replace.txt`
